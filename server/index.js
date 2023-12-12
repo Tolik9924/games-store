@@ -1,11 +1,51 @@
+require('dotenv').config()
 const express = require('express');
+const sequelize = require('./db');
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
+const path = require('path')
+
+// Models
+const models = require('./models/models');
+
+// Routes
+const router = require('./routes/index');
+
+// Error Handler
+const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 
 const PORT = process.env.PORT || 8080;
 
+console.log('Port ', PORT);
+
 const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.resolve(__dirname, 'static')));
+app.use(fileUpload({}));
+app.use('/api', router);
 
-app.get('/', (req, res) => {
-  res.send('HELLO POSTGRES + NODEJS!!!');
-});
+app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`server started on post ${PORT}`));
+const start = async () => {
+  try {
+    await sequelize.authenticate().then(() => {
+      console.log("CONNECTED!");
+    })
+      .catch((err) => {
+        console.log("SOMETHING DONE GOOFED");
+      });
+    await sequelize.sync().then(() => {
+      console.log("CONNECTED!");
+    })
+      .catch((err) => {
+        console.log("SOMETHING DONE GOOFED");
+      });
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+start();
