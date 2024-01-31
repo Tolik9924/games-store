@@ -1,0 +1,163 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+@import '../../../styles/font-family.scss';
+@import '../../../styles/background.scss';
+
+.formGroup {
+  position: relative;
+  display: flex;
+  width: 100%;
+  & > .span,
+  .input {
+      white-space: nowrap;
+      display: block;
+      &:not(:first-child):not(:last-child) {
+          border-radius: 0;
+      }
+      &:first-child {
+          border-radius: 6px 0 0 6px;
+      }
+      &:not(:first-child) {
+          margin-left: -1px;
+      }
+  }
+  & > .span {
+      text-align: center;
+      line-height: 25px;
+      color: $grey1;
+      border: 1px solid $borderSpan;
+      transition: background .3s ease, border .3s ease, color .3s ease;
+  }
+  &:focus-within {
+      & > .span {
+          color: $white;
+      }
+  }
+}
+
+.input {
+  display: block;
+  padding: 8px 16px;
+  line-height: 25px;
+  font-weight: 500;
+  font-family: inherit;
+  -webkit-appearance: none;
+  color:  $grey1;
+  border: 0;
+  border-bottom: 1px solid $grey1;
+  background: $backgroundInput;
+  transition: border .3s ease;
+  &::placeholder {
+      color: $grey2;
+  }
+  &:focus {
+      outline: none;
+  }
+}
+
+.primaryInput {
+  &:focus {
+      border-color: $borderInput;
+  }
+}
+
+.secondaryInput {
+  &:focus {
+      border-color: $red4;
+  }
+}
+
+.successInput {
+  &:focus {
+      border-color: $green;
+  }
+}
+
+// Span Theme
+.primarySpan {
+  & > .span {
+      background: $borderSpan; 
+  }
+  &:focus-within {
+      & > .span {
+          background: $spanBackgroundFocus;
+          border-color: $borderSpanFocus;
+      }
+  }
+}
+
+.secondarySpan {
+  & > .span {
+      background: $borderSpan; ; 
+  }
+  &:focus-within {
+      & > .span {
+          background: $secondarySpan;
+          border-color: $secondarySpan;
+      }
+  }
+}
+
+.successSpan {
+  & > .span {
+      background: $borderSpan; ; 
+  }
+  &:focus-within {
+      & > .span {
+          background: $successSpan;
+          border-color: $successSpan;
+      }
+  }
+}
+
+// Size Input
+.smallInput {
+  width: 5%;
+  font-size: 14px;
+}
+
+.mediumInput {
+  width: 10%;
+  font-size: 18px;
+}
+
+.largeInput {
+  width: 15%;
+  font-size: 24px;
+}
+
+.fullwidthMediumInput {
+  width: 100%;
+  font-size: 20px;
+}
+
+.fullwidthInput {
+  width: 100%;
+  font-size: 30px;
+}
+
+// Size Span
+.smallSpan {
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.mediumSpan {
+  padding: 10px 14px;
+  font-size: 24px;
+}
+
+.largeSpan {
+  padding: 14px 18px;
+  font-size: 28px;
+}
+
+.fullwidthMediumSpan {
+  padding: 14px 18px;
+  font-size: 18px;
+}
+
+.fullwidthSpan {
+  padding: 24px 28px;
+  font-size: 38px;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 // styles
 import styles from './RegistrationForm.module.scss';
@@ -23,10 +23,18 @@ const RegistrationForm = () => {
 
   const handleChangeActive = (tab) => {
     setActiveTab(tab);
-    setData((prev) => ({...prev, role: `${tab === 0 ? STUDENT_ROLE : TEACHER_ROLE}`}));
+    setData((prev) => ({ ...prev, role: `${tab === 0 ? STUDENT_ROLE : TEACHER_ROLE}` }));
   };
 
-  return(
+  const handleChange = ({target: {name, value}}) => {
+    setData({ ...data, [name]: value });
+  };
+
+  useEffect(() => {
+    console.log('Data: ', data);
+  }, [data]);
+
+  return (
     <div className={styles.contentWrap}>
       {isLoading ? (
         <div>is loading...</div>
@@ -34,14 +42,14 @@ const RegistrationForm = () => {
         <div className={styles.blocksWrap}>
           <div className={styles.roles}>
             <div className={`${styles.tab} ${activeTab === 0 ? styles.active : ''}`}>
-                <button className={styles.button} onClick={() => handleChangeActive(0)}>
-                  <h2 onClick={() => handleChangeActive(0)} className={styles.button}>Student</h2>
-                </button>
+              <button className={styles.button} onClick={() => handleChangeActive(0)}>
+                <h2 onClick={() => handleChangeActive(0)} className={styles.button}>Student</h2>
+              </button>
             </div>
             <div className={`${styles.tab} ${activeTab === 1 ? styles.active : ''}`}>
-                <button className={styles.button} onClick={() => handleChangeActive(1)}>
-                  <h2>Teacher</h2>
-                </button>
+              <button className={styles.button} onClick={() => handleChangeActive(1)}>
+                <h2>Teacher</h2>
+              </button>
             </div>
           </div>
           <div className={styles.topWrap}>
@@ -50,12 +58,28 @@ const RegistrationForm = () => {
           </div>
           <div className={styles.formRegistration}>
             <div className={styles.formControl}>
-              <input className={styles.fullName} type="text" />
-              <input className={styles.dateOfBirth} type="text" />
+              <Input type="text"
+                name='fullName'
+                value={data.fullName}
+                span='FullName'
+                placeholder="Fullname"
+                size='fullwidthMedium'
+                theme='primary'
+                handleChange={(e) => handleChange(e)}
+              />
+              <Input type="date"
+                name='dateOfBirth'
+                value={data.dateOfBirth}
+                span='Date of Birth'
+                placeholder="Date of birth"
+                size='fullwidthMedium'
+                theme='primary'
+                handleChange={(e) => handleChange(e)}
+              />
               <input className={styles.email} type="email" />
               <input className={styles.password} type="password" />
               <input className={styles.repeatPassword} type="password" />
-              <Button 
+              <Button
                 type='button'
                 size='medium'
                 theme='primary'
@@ -72,7 +96,6 @@ const RegistrationForm = () => {
           </div>
         </div>
       )}
-      <Input />
     </div>
   );
 };
