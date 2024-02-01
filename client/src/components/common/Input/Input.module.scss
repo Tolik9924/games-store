@@ -22,11 +22,13 @@
       }
   }
   & > .span {
-      text-align: center;
+      text-align: left;
       line-height: 25px;
       color: $grey1;
       border: 1px solid $borderSpan;
       transition: background .3s ease, border .3s ease, color .3s ease;
+      display: block;
+      width: 250px;
   }
   &:focus-within {
       & > .span {
@@ -51,6 +53,7 @@
       color: $grey2;
   }
   &:focus {
+      color: $grey1;
       outline: none;
   }
 }
@@ -126,6 +129,11 @@
   font-size: 24px;
 }
 
+.fullwidthSmallInput {
+  width: 100%;
+  font-size: 14px;
+}
+
 .fullwidthMediumInput {
   width: 100%;
   font-size: 20px;
@@ -150,6 +158,11 @@
 .largeSpan {
   padding: 14px 18px;
   font-size: 28px;
+}
+
+.fullwidthSmallSpan {
+  padding: 10px 14px;
+  font-size: 14px;
 }
 
 .fullwidthMediumSpan {

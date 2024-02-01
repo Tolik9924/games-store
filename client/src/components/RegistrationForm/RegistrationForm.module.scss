@@ -1,5 +1,6 @@
 @import '../../styles/colors.scss';
 @import '../../styles/font.scss';
+@import '../../styles/background.scss';
 
 .contentWrap {
   display: flex;
@@ -21,7 +22,7 @@
   align-items: center;
   background-color: $white;
   width: 560px;
-  height: 600px;
+  height: 700px;
   border-radius: 15px;
   padding: 15px;
 
@@ -95,11 +96,31 @@
 
 .formRegistration {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formControl{
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.inputContainer {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.showPassword {
+  border: 1px solid $borderSpan;
+  border-radius: 0 5px 5px 0;
+  text-align: center;
+  padding: 10px 0;
+  background: $borderSpan;
+  color: $grey1;
+  padding: 10px 10px;
 }
 
 .bottomWrap {
