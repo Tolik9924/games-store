@@ -58,6 +58,11 @@
   }
 }
 
+.error {
+  color: $crimson;
+  text-align: left;
+}
+
 .primaryInput {
   &:focus {
       border-color: $borderInput;

@@ -22,7 +22,6 @@
   align-items: center;
   background-color: $white;
   width: 560px;
-  height: 700px;
   border-radius: 15px;
   padding: 15px;
 
@@ -108,9 +107,16 @@
 }
 
 .inputContainer {
+  width: 95%;
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
+}
+
+.inputContainerDateOfBirth {
+  width: 95%;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .showPassword {
@@ -121,6 +127,18 @@
   background: $borderSpan;
   color: $grey1;
   padding: 10px 10px;
+  height: 25px;
+}
+
+.hidePassword {
+  border: 1px solid $borderInput;
+  border-radius: 0 5px 5px 0;
+  text-align: center;
+  padding: 10px 0;
+  background: $borderInput;
+  color: $white;
+  padding: 10px 10px;
+  height: 25px;
 }
 
 .bottomWrap {
