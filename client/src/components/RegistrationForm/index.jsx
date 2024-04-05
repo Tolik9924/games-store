@@ -301,7 +301,7 @@ const RegistrationForm = () => {
           </FormProvider>
           <div className={styles.bottomWrap}>
             <p>Already have an account?</p>
-            <Link className={styles.link}>
+            <Link className={styles.link} to="/login">
               <span>Sign In</span>
             </Link>
           </div>

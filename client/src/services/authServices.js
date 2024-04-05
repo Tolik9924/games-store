@@ -6,3 +6,9 @@ export const registration = async (user) => {
   const { data } = await API.post('api/user/registration', user);
   return data;
 }
+
+export const login = async (user) => {
+  const data = await API.post('api/user/login', user);
+  updateToken(data.data.token);
+  return data;
+};
