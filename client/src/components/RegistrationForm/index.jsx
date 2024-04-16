@@ -24,6 +24,7 @@ import {
   REGEX_DATE_OF_BIRTH 
 } from '../../helpers/regex';
 import { registration } from '../../services/authServices';
+import Loader from '../common/Loader';
 
 const RegistrationForm = () => {
   const methods = useForm();
@@ -98,10 +99,11 @@ const RegistrationForm = () => {
     setData({ ...data, dateOfBirth: event.target.value });
   };
 
-  const onSubmit = methods.handleSubmit (async data => {
+  const onSubmit = methods.handleSubmit (async formData => {
+    console.log('Submit data: ', {...formData, role: data.role});
     if (!checkValidation()) {
       setIsLoading(true);
-      await registerUser(data);
+      await registerUser({...formData, role: data.role});
       setIsLoading(false);
     }
   });
@@ -120,14 +122,12 @@ const RegistrationForm = () => {
 
   useEffect(() => {
     console.log('Data: ', data);
-    console.log('Show Password: ', showPassword);
-    console.log("Day: ", data.dateOfBirth);
-  }, [data, showPassword]);
+  }, [data]);
 
   return (
     <div className={styles.contentWrap}>
       {isLoading ? (
-        <div>is loading...</div>
+        <Loader isAuthPage/>
       ) : (
         <div className={styles.blocksWrap}>
           <div className={styles.roles}>

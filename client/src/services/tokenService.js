@@ -2,6 +2,7 @@ const TOKEN_NAME = 'token';
 
 export const getToken = () => {
   localStorage.getItem(TOKEN_NAME) ?? JSON.parse(localStorage.getItem(TOKEN_NAME));
+  return localStorage.getItem(TOKEN_NAME);
 };
 
 export const updateToken = (token) => {

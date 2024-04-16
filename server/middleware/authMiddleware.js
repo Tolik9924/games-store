@@ -1,18 +1,24 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = function (req, res, next) {
-    if (req.method === "OPTIONS") {
-        next();
-    }
+const authentication = (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ')[1];
+        console.log('Req: ', req);
+        console.log('Req auth middleware: ', req.headers);
+        console.log('Req method: ', req.method);
+        const token = req.headers.authorization.split(' ')[1]; // Bearer asfasnfkajsfnjk
         if (!token) {
-            return res.status(401).json({message: "Is not authorized"})
+            console.log('Not authorized');
+            return res.status(401).json({message: "Not authorized"})
         }
-        const decoded = jwt.verify(token, process.env.SECRET_KEY)
-        req.user = decoded
-        next()
-    } catch (e) {
-        res.status(401).json({message: "Is not authorized"})
+        const decode = jwt.verify(token, process.env.SECRET_KEY);
+        console.log('DECODE: ', decode);
+        req.user = decode;
+        next();
+    } catch (err) {
+        res.status(401).json({
+            message: 'Authentication failed!',
+        });
     }
 };
+
+module.exports = authentication;

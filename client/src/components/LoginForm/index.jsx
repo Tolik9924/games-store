@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { 
+  useState, 
+  useMemo, 
+  useContext 
+} from 'react';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 // components
 import Input from '../common/Input';
-import { Link, useNavigate } from 'react-router-dom';
+import Loader from '../common/Loader';
 
 // services
 import { login } from '../../services/authServices';
@@ -38,12 +44,6 @@ const LoginForm = () => {
     email: '',
     password: ''
   });
-
-  useEffect(() => {
-    console.log('Data: ', data);
-    console.log('Email: ', data.email);
-    console.log('Password: ', data.password);
-  }, [data]);
 
   const handleChange = ({ target: { name, value } }) => {
     setData({ ...data, [name]: value });
@@ -85,7 +85,7 @@ const LoginForm = () => {
   return (
     <div className={styles.wrap}>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loader isAuthPage />
       ) : (
         <div className={styles.blocksWrap}>
           <div className={styles.topWrap}>
