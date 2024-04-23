@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
+import { FormProvider, useForm } from 'react-hook-form';
 
 // components
 import Input from '../common/Input';
@@ -26,10 +27,10 @@ import {
 
 // styles
 import styles from './LoginForm.module.scss';
-import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../common/Button';
+import { withSnackbar } from '../withSnackbar/withSnackbar';
 
-const LoginForm = () => {
+const LoginForm = ({ snackbarShowMessage }) => {
   const { fetchUser } = useContext(CurrentUserContext);
 
   const history = useNavigate();
@@ -74,6 +75,10 @@ const LoginForm = () => {
     } catch (err) {
       setIsLoading(false);
       setIsError(true);
+      await snackbarShowMessage({
+        message: 'Authentication failed',
+        severity: 'fail',
+      });
       console.log(err);
     }
   };
@@ -173,4 +178,4 @@ const LoginForm = () => {
   );
 }
 
-export default LoginForm;
+export default withSnackbar(LoginForm);

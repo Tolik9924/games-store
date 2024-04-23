@@ -25,8 +25,9 @@ import {
 } from '../../helpers/regex';
 import { registration } from '../../services/authServices';
 import Loader from '../common/Loader';
+import { withSnackbar } from '../withSnackbar/withSnackbar';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ snackbarShowMessage }) => {
   const methods = useForm();
 
   const [data, setData] = useState({
@@ -100,11 +101,11 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = methods.handleSubmit (async formData => {
-    console.log('Submit data: ', {...formData, role: data.role});
     if (!checkValidation()) {
       setIsLoading(true);
       await registerUser({...formData, role: data.role});
       setIsLoading(false);
+
     }
   });
 
@@ -112,10 +113,18 @@ const RegistrationForm = () => {
     try {
       await registration(userInfo);
       setErrMessage('');
+      snackbarShowMessage({
+        message: 'User was created.',
+        severity: 'success',
+      });
     } catch (err) {
       setIsLoading(false);
       setHasError((prev) => ({ ...prev, hasMessageError: true }));
       setErrMessage(err.response.data.message);
+      snackbarShowMessage({
+        message: 'User was not created.',
+        severity: 'fail',
+      });
       console.log(err.response.data.message);
     }
   };
@@ -311,4 +320,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default withSnackbar(RegistrationForm);

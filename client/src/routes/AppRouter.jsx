@@ -11,6 +11,7 @@ import GeneralLayout from '../components/GeneralLayout/GeneralLayout';
 
 // constants
 import { ADMIN_ROLE } from '../constants/userRoles';
+import ChangePassword from '../pages/ChangePassword';
 
 // Pages
 const Registration = lazy(() => import('../pages/Registration'));
@@ -53,6 +54,7 @@ const RouterWrapper = () => {
         <Route path='/app' element={<Main />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/reset-password' element={<ChangePassword />} />
       </Routes>
     </Suspense>
   );
